@@ -15,7 +15,6 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.makhabatusen.android2noteapp.R;
 import com.makhabatusen.android2noteapp.version2.App;
-import com.makhabatusen.android2noteapp.version2.utils.Prefs;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,16 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background"
+    android:padding="0dp"
     tools:context=".version2.ui.profile.ProfileFragment">
 
-    <ImageView
-        android:id="@+id/iv_avatar"
-        android:layout_width="200dp"
-        android:src="@drawable/ic_profile"
-        android:layout_height="200dp"
-        android:layout_marginTop="50dp" />
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+
+            <RelativeLayout
+                android:id="@+id/relative_layout"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/bg_white_with_corners"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="Makhabat Usen"
+                    android:textColor="@color/blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_name"
+                    android:layout_alignStart="@+id/tv_name"
+                    android:text="Android Developer"
+                    android:textColor="@color/blue"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_followers_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_title"
+                    android:layout_alignStart="@+id/tv_title"
+                    android:layout_marginTop="20dp"
+                    android:text="150 K"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_followers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_rating_num"
+                    android:layout_alignStart="@+id/tv_title"
+                    android:text="FOLLOWERS" />
+
+                <TextView
+                    android:id="@+id/tv_rating_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_title"
+                    android:layout_marginStart="55dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_toEndOf="@+id/tv_followers_num"
+                    android:text="5.0"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_rating_num"
+                    android:layout_alignStart="@+id/tv_rating_num"
+                    android:text="RATING" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="140dp"
+                android:layout_height="180dp"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="80dp"
+                android:src="@drawable/ic_developer" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="My Works"
+            android:layout_marginTop="10dp"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/first_material_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@drawable/bg_white_with_corners"
+                app:cardBackgroundColor="@color/light_blue">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/gif_iv"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/eco" />
+
+                    <TextView
+                        android:id="@+id/tv_project_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="45dp"
+                        android:layout_toEndOf="@+id/gif_iv"
+                        android:text="Project #1"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_project_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_below="@+id/tv_project_name"
+                        android:layout_marginStart="30dp"
+                        android:layout_toEndOf="@+id/gif_iv"
+                        android:text="Desc #1" />
+
+
+                </RelativeLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/first_material_card_view2"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_below="@+id/first_material_card_view"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_white_with_corners"
+                app:cardBackgroundColor="@color/light_blue">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/gif_iv2"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/free" />
+
+                    <TextView
+                        android:id="@+id/tv_project_name2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="45dp"
+                        android:layout_toEndOf="@+id/gif_iv2"
+                        android:text="Project #2"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/et_project_details2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_project_name2"
+                        android:layout_marginStart="30dp"
+                        android:layout_toEndOf="@+id/gif_iv2"
+                        android:text="Desc #2" />
+
+
+                </RelativeLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

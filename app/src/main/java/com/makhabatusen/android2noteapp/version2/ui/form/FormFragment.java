@@ -13,6 +13,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.makhabatusen.android2noteapp.R;
+import com.makhabatusen.android2noteapp.version2.App;
 import com.makhabatusen.android2noteapp.version2.models.Note;
 
 import java.text.SimpleDateFormat;
@@ -37,6 +38,12 @@ public class FormFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         etNote = view.findViewById(R.id.et_note);
+
+        if (getArguments()!=null)
+            note = (Note) getArguments().getSerializable("note_hf");
+
+        if (note != null) etNote.setText(note.getNote());
+
         view.findViewById(R.id.btn_save).setOnClickListener(v -> {
             save();
         });
@@ -48,15 +55,19 @@ public class FormFragment extends Fragment {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm yyyy/MM/dd", Locale.ROOT);
         String date = dateFormat.format(System.currentTimeMillis());
 
-        note = new Note(textNote,date);
+        if (note == null) {
+            note = new Note(textNote,date);
+            App.getAppDatabase().noteDao().insert(note);
+        } else {
+            note.setNote(textNote);
+            App.getAppDatabase().noteDao().update(note);
+        }
 
 
         /** OPTION #1 with Bundle and parentFragmentManager **/
-
         Bundle bundle = new Bundle();
         bundle.putSerializable(KEY_NOTE_FF, note);
         getParentFragmentManager().setFragmentResult(REQUEST_KEY_FF,bundle);
-
         close();
 
         /** OPTION #2 with Safe Args **/

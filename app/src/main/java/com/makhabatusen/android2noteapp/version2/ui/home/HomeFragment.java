@@ -22,7 +22,8 @@ import com.makhabatusen.android2noteapp.R;
 import com.makhabatusen.android2noteapp.version2.App;
 import com.makhabatusen.android2noteapp.version2.models.Note;
 import com.makhabatusen.android2noteapp.version2.ui.form.FormFragment;
-import com.makhabatusen.android2noteapp.version2.utils.Prefs;
+
+import java.util.List;
 
 
 public class HomeFragment extends Fragment {
@@ -30,6 +31,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private NoteAdapter adapter;
     private Note note;
+    private boolean toAddNote;
 
 
     @Override
@@ -37,6 +39,8 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         adapter = new NoteAdapter();
         setHasOptionsMenu(true);
+        loadData();
+
     }
 
     @Override
@@ -70,6 +74,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.fab).setOnClickListener(v -> {
+            toAddNote = true;
             openForm();
         });
         recyclerView = view.findViewById(R.id.recycler_view);
@@ -86,6 +91,11 @@ public class HomeFragment extends Fragment {
 
     }
 
+    private void loadData() {
+        List<Note> list = App.getAppDatabase().noteDao().getAll();
+        adapter.addList(list);
+    }
+
 
     private void initList() {
         recyclerView.setAdapter(adapter);
@@ -93,8 +103,12 @@ public class HomeFragment extends Fragment {
         adapter.setListener(new OnItemOnCLickListener() {
             @Override
             public void onCLick(int pos) {
-                // TODO edit
-                Toast.makeText(requireContext(), "Note position: " + pos, Toast.LENGTH_SHORT).show();
+                toAddNote = false;
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("note_hf", adapter.getItem(pos));
+               // Toast.makeText(requireContext(), "Note position: " + pos, Toast.LENGTH_SHORT).show();
+                navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+                navController.navigate(R.id.formFragment, bundle);
             }
 
             @Override
@@ -111,7 +125,9 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                         note = (Note) result.getSerializable(FormFragment.KEY_NOTE_FF);
+                        if (toAddNote)
                         adapter.addItem(note);
+                        else adapter.updateItem(note);
                     }
                 }
         );

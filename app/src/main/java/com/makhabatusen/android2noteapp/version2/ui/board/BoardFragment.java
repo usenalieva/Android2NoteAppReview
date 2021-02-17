@@ -15,13 +15,15 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.makhabatusen.android2noteapp.R;
 import com.makhabatusen.android2noteapp.version2.App;
-import com.makhabatusen.android2noteapp.version2.utils.Prefs;
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
+import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
 
 public class BoardFragment extends Fragment {
 
     private ViewPager2 viewPager;
     private BoardAdapter adapter;
+    private WormDotsIndicator dotsIndicator;
 
 
 
@@ -41,7 +43,9 @@ public class BoardFragment extends Fragment {
     private void initView(View view) {
         viewPager = view.findViewById(R.id.view_pager_board);
         adapter = new BoardAdapter(getContext());
+        dotsIndicator =  view.findViewById(R.id.worm_dots_indicator);
         viewPager.setAdapter(adapter);
+        dotsIndicator.setViewPager2(viewPager);
         view.findViewById(R.id.btn_skip).setOnClickListener(v-> {
            close();
         });
@@ -49,8 +53,6 @@ public class BoardFragment extends Fragment {
     }
 
     private void close() {
-//        Prefs prefs = new Prefs(requireContext());
-//        prefs.saveBoardStatus();
         App.getPrefs().saveBoardStatus();
         NavController navController = Navigation.findNavController(requireActivity(),R.id.nav_host_fragment);
         navController.navigateUp();

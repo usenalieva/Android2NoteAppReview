@@ -12,9 +12,10 @@ import com.makhabatusen.android2noteapp.R;
 import com.makhabatusen.android2noteapp.version2.models.Note;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
-    private ArrayList<Note> list;
+    private List<Note> list;
     private OnItemOnCLickListener listener;
 
 
@@ -47,6 +48,20 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     public void setListener(OnItemOnCLickListener listener) {
         this.listener = listener;
+    }
+
+    public void addList(List<Note> list) {
+        this.list.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    public void updateItem(Note note) {
+        this.list.set(list.indexOf(note), note);
+        notifyItemChanged(list.indexOf(note));
+    }
+
+    public Note getItem(int pos) {
+        return list.get(pos);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
