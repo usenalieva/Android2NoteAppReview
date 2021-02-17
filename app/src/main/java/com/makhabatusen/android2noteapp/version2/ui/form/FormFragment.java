@@ -38,9 +38,10 @@ public class FormFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         etNote = view.findViewById(R.id.et_note);
+//        note = (Note) getArguments().getSerializable(HomeFragment.KEY_NOTE_HF);
 
-        if (getArguments()!=null)
-            note = (Note) getArguments().getSerializable("note_hf");
+        if (getArguments() != null)
+            note = FormFragmentArgs.fromBundle(getArguments()).getNote();
 
         if (note != null) etNote.setText(note.getNote());
 
@@ -63,18 +64,11 @@ public class FormFragment extends Fragment {
             App.getAppDatabase().noteDao().update(note);
         }
 
-
-        /** OPTION #1 with Bundle and parentFragmentManager **/
         Bundle bundle = new Bundle();
         bundle.putSerializable(KEY_NOTE_FF, note);
         getParentFragmentManager().setFragmentResult(REQUEST_KEY_FF,bundle);
         close();
 
-        /** OPTION #2 with Safe Args **/
-//        FormFragmentDirections.actionFormFragmentToNavigationHome().setNote(note);
-//        close();
-//        NavController navController = Navigation.findNavController(requireActivity(),R.id.nav_host_fragment);
-//        navController.navigate(FormFragmentDirections.actionFormFragmentToNavigationHome().setNote(note));
 
     }
 

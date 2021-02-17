@@ -7,7 +7,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +31,7 @@ public class HomeFragment extends Fragment {
     private NoteAdapter adapter;
     private Note note;
     private boolean toAddNote;
+    public static final String KEY_NOTE_HF = "note_hf";
 
 
     @Override
@@ -80,14 +80,7 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view);
         initList();
 
-        /** OPTION #1 with Bundle and parentFragmentManager **/
            setFragmentListener();
-
-
-        /** OPTION #2 with Safe Args **/
-//        if (getArguments() != null)
-//            note =  HomeFragmentArgs.fromBundle(getArguments()).getNote();
-//        adapter.addItem(note);
 
     }
 
@@ -104,11 +97,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onCLick(int pos) {
                 toAddNote = false;
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("note_hf", adapter.getItem(pos));
-               // Toast.makeText(requireContext(), "Note position: " + pos, Toast.LENGTH_SHORT).show();
+
+                /** OPTION #1 with Bundle **/
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable(KEY_NOTE_HF, adapter.getItem(pos));
+//                Toast.makeText(requireContext(), "Note position: " + pos, Toast.LENGTH_SHORT).show();
+//                     navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+//                navController.navigate(R.id.formFragment, bundle);
+                /** OPTION #2 with Safe Args **/
                 navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
-                navController.navigate(R.id.formFragment, bundle);
+                navController.navigate(HomeFragmentDirections.actionNavigationHomeToFormFragment().setNote(adapter.getItem(pos)));
             }
 
             @Override
